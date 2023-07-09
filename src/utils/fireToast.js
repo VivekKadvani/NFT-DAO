@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 export default function fireToast(type, msg) {
-  if (type == 'error') {
+  if (type === 'error') {
     toast.error(msg, {
       position: 'top-center',
       autoClose: 3000,
@@ -12,7 +12,7 @@ export default function fireToast(type, msg) {
       theme: 'light',
     });
   }
-  if (type == 'success') {
+  if (type === 'success') {
     toast.success(msg, {
       position: 'top-center',
       autoClose: 2000,
@@ -24,7 +24,7 @@ export default function fireToast(type, msg) {
       theme: 'light',
     });
   }
-  if (type == 'warn') {
+  if (type === 'warn') {
     toast.warn(msg, {
       position: 'top-center',
       autoClose: 2000,

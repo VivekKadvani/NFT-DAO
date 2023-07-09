@@ -20,6 +20,8 @@ import WalletConnect from './WalletConnect';
 import fireToast from '../utils/fireToast';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//utils function
+import copyToClipboard from '../utils/copyAddress';
 
 const Header = () => {
   //wagmi
@@ -40,10 +42,10 @@ const Header = () => {
   const handleCloseWallet = () => {
     setWalletOpen(false);
   };
-  window.ethereum.on('accountsChanged', (accounts) => {
-    // setFlag(flag + 1);
-    console.log('Accoount changed _________________________');
-  });
+  // window.ethereum.on('accountsChanged', (accounts) => {
+  //   // setFlag(flag + 1);
+  //   console.log('Accoount changed _________________________');
+  // });
   // window.ethereum.on('chainChanged', (accounts) => {
   //   // setFlag(flag + 1);
   //   console.log('changed chain event ');
@@ -67,7 +69,15 @@ const Header = () => {
               </NavLink>
             </div>
           </div>
-
+          <div className="  flex items-center">
+            <div className="flex">
+              <NavLink to="/create" className="flex items-center">
+                <div className="ml-2 text-white">
+                  <p className=" text-black text-xl">Home</p>
+                </div>
+              </NavLink>
+            </div>
+          </div>
           {/* Wallet and cart section  */}
           <div className="flex justify-self-end">
             <div className=" bg-opacity-10 rounded-xl flex items-center bg-blue-500 h-14 bg-blur-xl border-2 border-gray-400">

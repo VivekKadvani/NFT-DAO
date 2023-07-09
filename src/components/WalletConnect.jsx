@@ -16,7 +16,6 @@ import { useTheme } from '@mui/material/styles';
 import { useAccount, useBalance, useConnect } from 'wagmi';
 // import { ethers } from 'ethers';
 //toast
-import { toast } from 'react-toastify';
 import fireToast from '../utils/fireToast';
 
 const WalletConnect = () => {
