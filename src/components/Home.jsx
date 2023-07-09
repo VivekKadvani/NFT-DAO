@@ -3,17 +3,34 @@ import { NavLink } from 'react-router-dom';
 //images
 import { AppContext } from '../App';
 //images
+//MUI
+import Dialog from '@mui/material/Dialog';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 //wagmi
 import { useAccount, useBalance, useConnect } from 'wagmi';
 //utils
 import contractInstance from '../utils/contractInstance';
+import CreateProposal from './CreateProposal';
+import IncreaseTotalSupply from './IncreaseTotalSupply';
 const Home = () => {
   //owner
   const owner = '0xC9399199f40686cfacF7Ae7555Ef0DEfa0487Ebe';
   //wagmi
   const { isConnected, address } = useAccount();
   //appcontext
-  const { walletopen, setWalletOpen } = useContext(AppContext);
+  const {
+    walletopen,
+    setWalletOpen,
+    proposaldialogopen,
+    setProposalDialogOpen,
+    supplydialogopen,
+    setsupplyDialogOpen,
+  } = useContext(AppContext);
+  //MUI
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
   //contract data
   const status = false;
   const [proposalData, setProposalData] = useState();
@@ -39,7 +56,7 @@ const Home = () => {
         <div className="sm:px-8 md:px-10 lg:px-16 px-4 ">
           {/* Owner section */}
           {address === owner ? (
-            <div className="text-left m-2  grid grid-cols-3  gap-4">
+            <div className="text-left m-2  grid lg:grid-cols-3 :grid-cols-1 gap-4">
               <NavLink to="/airdrop">
                 <div className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200 drop-shadow-sm ">
                   <p className="text-2xl text-black p-4 font-semibold ">
@@ -51,7 +68,13 @@ const Home = () => {
                   </p>
                 </div>
               </NavLink>
-              <div className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200 drop-shadow-sm ">
+
+              <div
+                className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200 drop-shadow-sm "
+                onClick={() => {
+                  setProposalDialogOpen(true);
+                }}
+              >
                 <p className="text-2xl text-black p-4 font-semibold">
                   Create Proposal
                 </p>
@@ -59,7 +82,20 @@ const Home = () => {
                   You can create new proposal by giving title and description.
                 </p>
               </div>
-              <div className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200  ">
+              <Dialog
+                fullScreen={fullScreen}
+                open={proposaldialogopen}
+                onClose={() => setProposalData(false)}
+                aria-labelledby="responsive-dialog-title"
+              >
+                <CreateProposal />
+              </Dialog>
+              <div
+                className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200  "
+                onClick={() => {
+                  setsupplyDialogOpen(true);
+                }}
+              >
                 <p className="text-2xl text-black p-4 font-semibold">
                   Increase Totalsupply
                 </p>
@@ -67,6 +103,14 @@ const Home = () => {
                   You can Increase size of stakeholder by Increase totalsupply.
                 </p>
               </div>
+              <Dialog
+                fullScreen={fullScreen}
+                open={supplydialogopen}
+                onClose={() => setsupplyDialogOpen(false)}
+                aria-labelledby="responsive-dialog-title"
+              >
+                <IncreaseTotalSupply />
+              </Dialog>
             </div>
           ) : (
             <></>

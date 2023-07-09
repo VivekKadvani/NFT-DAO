@@ -87,6 +87,8 @@ const Header = () => {
                   !isConnected
                     ? handleClickOpen()
                     : fireToast('success', 'Wallet already connected');
+
+                  isConnected && copyToClipboard(address);
                 }}
               >
                 <p className="px-2">

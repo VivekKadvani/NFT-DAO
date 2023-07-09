@@ -14,5 +14,5 @@ export default function copyToClipboard(value) {
   document.body.removeChild(textarea);
 
   // Optional: Provide user feedback
-  alert('Value copied to clipboard: ' + valueToCopy);
+  //   alert('Value copied to clipboard: ' + valueToCopy);
 }

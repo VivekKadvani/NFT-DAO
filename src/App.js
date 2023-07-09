@@ -19,9 +19,20 @@ export const AppContext = createContext();
 
 function App() {
   const [walletopen, setWalletOpen] = useState(false);
+  const [proposaldialogopen, setProposalDialogOpen] = useState(false);
+  const [supplydialogopen, setsupplyDialogOpen] = useState(false);
   return (
     <WagmiConfig config={config}>
-      <AppContext.Provider value={{ walletopen, setWalletOpen }}>
+      <AppContext.Provider
+        value={{
+          walletopen,
+          setWalletOpen,
+          proposaldialogopen,
+          setProposalDialogOpen,
+          supplydialogopen,
+          setsupplyDialogOpen,
+        }}
+      >
         <ToastContainer />
         <Router>
           <div className=" flex flex-col h-screen">
@@ -38,7 +49,7 @@ function App() {
               {/* <Route path="/profile" element={<Profile />} />
             <Route path="/nftdetail/:nftaddress/:id" element={<NftDetail />} /> */}
             </Routes>
-            <Footer className="self-end " />
+            <Footer className="" />
           </div>
         </Router>
       </AppContext.Provider>
