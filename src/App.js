@@ -49,7 +49,7 @@ function App() {
               {/* <Route path="/profile" element={<Profile />} />
             <Route path="/nftdetail/:nftaddress/:id" element={<NftDetail />} /> */}
             </Routes>
-            <Footer className="" />
+            <Footer className="-z-1" />
           </div>
         </Router>
       </AppContext.Provider>
