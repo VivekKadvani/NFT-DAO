@@ -13,6 +13,8 @@ import { useAccount, useBalance, useConnect } from 'wagmi';
 import contractInstance from '../utils/contractInstance';
 import CreateProposal from './CreateProposal';
 import IncreaseTotalSupply from './IncreaseTotalSupply';
+import fireToast from '../utils/fireToast';
+import Loader from './Loader';
 const Home = () => {
   //owner
   const owner = '0xC9399199f40686cfacF7Ae7555Ef0DEfa0487Ebe';
@@ -30,33 +32,41 @@ const Home = () => {
   //MUI
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
+  //loader
+  const [loading, setLoading] = useState(false);
   //contract data
   const status = false;
   const [proposalData, setProposalData] = useState();
   useEffect(() => {
     async function getProposalData() {
-      const { contract, networkId, signerAddress } = await contractInstance();
-      const totalProposal = parseInt(await contract.proposalCounter());
-      const proposalArray = [];
-      for (let i = 1; i <= totalProposal; i++) {
-        const proposalData = await contract.proposals(i);
-        proposalArray.push(proposalData);
+      try {
+        setLoading(true);
+        const { contract, networkId, signerAddress } = await contractInstance();
+        const totalProposal = parseInt(await contract.proposalCounter());
+        const proposalArray = [];
+        for (let i = 1; i <= totalProposal; i++) {
+          const proposalData = await contract.proposals(i);
+          proposalArray.push(proposalData);
+        }
+        setProposalData(proposalArray);
+      } catch (e) {
+        fireToast('error', 'Failed Loading Proposal Data.');
+      } finally {
+        setLoading(false);
       }
-      setProposalData(proposalArray);
     }
     getProposalData();
   }, []);
 
   return (
-    <div className="h-full pt-20">
+    <div className="h-fit pt-20 flex-grow">
       <div className=" w-full h-fit mt-4 flex flex-col gap-5 ">
         <div className="sm:px-8 md:px-10 lg:px-16 px-4 ">
           {/* Owner section */}
           {address === owner ? (
             <div className="text-left m-2  grid lg:grid-cols-3 :grid-cols-1 gap-4">
               <NavLink to="/airdrop">
-                <div className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200 drop-shadow-sm ">
+                <div className="rounded-xl bg-gray-200 transform-gpu hover:-translate-y-1 transition-all duration-200 drop-shadow-sm ">
                   <p className="text-2xl text-black p-4 font-semibold ">
                     Air Drop
                   </p>
@@ -68,7 +78,7 @@ const Home = () => {
               </NavLink>
 
               <div
-                className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200 drop-shadow-sm "
+                className="rounded-xl bg-gray-200 transform-gpu hover:-translate-y-1 transition-all duration-200 drop-shadow-sm "
                 onClick={() => {
                   setProposalDialogOpen(true);
                 }}
@@ -89,7 +99,7 @@ const Home = () => {
                 <CreateProposal />
               </Dialog>
               <div
-                className="rounded-xl bg-slate-200 transform-gpu hover:-translate-y-1 transition-all duration-200  "
+                className="rounded-xl bg-gray-200 transform-gpu hover:-translate-y-1 transition-all duration-200  "
                 onClick={() => {
                   setsupplyDialogOpen(true);
                 }}
@@ -119,37 +129,47 @@ const Home = () => {
             <p className="text-3xl p-2 my-4">Current Proposal</p>
           </div>
           <div className=" m-2 ">
-            {proposalData &&
-              proposalData.map((proposal, key) => {
-                return (
-                  <NavLink index={key} to={`/proposalDetail/${proposal.id}`}>
-                    <div className="bg-gray-200 w-full rounded-xl my-3">
-                      <div className="flex justify-between">
-                        <p className="text-lg font-medium p-4">
-                          {proposal.title}
-                        </p>
-                        <div className="p-4 flex items-center gap-2">
-                          {!proposal.closed ? (
-                            <p className="text-green-500">Running</p>
-                          ) : (
-                            <p className="text-gray-500">Completed</p>
-                          )}
-                          {!proposal.closed ? (
-                            <div className="h-4 w-4 rounded-full bg-green-500"></div>
-                          ) : (
-                            <div className="h-4 w-4 rounded-full bg-gray-500"></div>
-                          )}
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                {' '}
+                {proposalData &&
+                  proposalData.map((proposal, key) => {
+                    return (
+                      <NavLink
+                        index={key}
+                        to={`/proposalDetail/${proposal.id}`}
+                      >
+                        <div className="bg-gray-200 hover:bg-gray-300 transition-all transform-gpu duration-200 w-full rounded-xl my-3">
+                          <div className="flex justify-between">
+                            <p className="text-lg font-medium p-4">
+                              {proposal.title}
+                            </p>
+                            <div className="p-4 flex items-center gap-2">
+                              {!proposal.closed ? (
+                                <p className="text-green-500">Running</p>
+                              ) : (
+                                <p className="text-gray-500">Completed</p>
+                              )}
+                              {!proposal.closed ? (
+                                <div className="h-4 w-4 rounded-full bg-green-500"></div>
+                              ) : (
+                                <div className="h-4 w-4 rounded-full bg-gray-500"></div>
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-base text-gray-500 p-4">
+                              {proposal.description}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <p className="text-base text-gray-500 p-4">
-                          {proposal.description}
-                        </p>
-                      </div>
-                    </div>
-                  </NavLink>
-                );
-              })}
+                      </NavLink>
+                    );
+                  })}
+              </>
+            )}
           </div>
         </div>
       </div>

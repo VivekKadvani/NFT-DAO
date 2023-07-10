@@ -592,6 +592,11 @@ export const ABI = [
         name: 'closed',
         type: 'bool',
       },
+      {
+        internalType: 'bool',
+        name: 'passed',
+        type: 'bool',
+      },
     ],
     stateMutability: 'view',
     type: 'function',

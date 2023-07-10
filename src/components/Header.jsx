@@ -167,7 +167,7 @@ const Header = () => {
 
               {/* Wallet section  */}
               <div className="md:flex hidden ">
-                <div className=" bg-opacity-10 rounded-xl md:flex items-center bg-blue-500 h-14 bg-blur-xl border-2 border-gray-400  ">
+                <div className=" bg-opacity-10 rounded-xl md:flex items-center bg-gray-400 h-14 bg-blur-xl border-2 border-gray-400  ">
                   <div
                     className="lg:flex md:flex  hidden text-gray-700 cursor-pointer"
                     onClick={() => {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 //utils
 import contractInstance from '../utils/contractInstance';
 import fireToast from '../utils/fireToast';
+import Loader from './Loader';
 const Airdrop = () => {
   const [addressData, setAddressData] = useState([]);
   const [address, setCurrentAddress] = useState('');
@@ -43,7 +44,6 @@ const Airdrop = () => {
       if (addressData.length < 25) {
         setAddressData([...addressData, address]);
         setError('');
-        console.log(maxSupply);
       } else {
         setError(
           'You can not enter more than Total Supply or Increase Total Supply',
@@ -75,19 +75,21 @@ const Airdrop = () => {
     }
   };
   return (
-    <div className="max-h-fit">
-      <div className=" pt-20 ">
+    <div className="max-h-fit flex-grow">
+      <div className=" pt-20 min-h-max">
         <div className="bg-gray-200  mx-16 p-4 mt-8 rounded-xl">
           <div className="p-4 flex justify-between">
-            <p className="text-xl font-semibold ">AirDrop NFT</p>
+            <p className="text-2xl font-semibold ">AirDrop NFT</p>
+            {loading ? <Loader /> : <> </>}
             {addressData?.length > 0 ? (
               <button
-                className="bg-black rounded-xl text-white p-4 font-semibold "
+                className="bg-black rounded-xl text-white p-4 font-semibold h-14 "
                 onClick={() => {
                   handleAirDrop();
                 }}
+                disabled={loading}
               >
-                Start Airdrop
+                {loading ? 'Airdrop Running' : 'Start Airdrop'}
               </button>
             ) : (
               <button
@@ -99,7 +101,7 @@ const Airdrop = () => {
             )}
           </div>
           <div className="p-4 w-full">
-            <p className="text-xl">Enter Address</p>
+            <p className="text-xl my-4">Enter Address</p>
             <div className="flex gap-6">
               <input
                 type="text"
@@ -111,7 +113,7 @@ const Airdrop = () => {
               />
 
               <button
-                className="p-4 rounded-xl bg-black text-green-500"
+                className="p-4 rounded-xl bg-black text-white transition-all px-8 duration-200 font-semibold hover:text-green-500"
                 onClick={() => {
                   setAddress(address);
                 }}
@@ -128,7 +130,7 @@ const Airdrop = () => {
                   return (
                     <div
                       key={index}
-                      className="bg-gray-400 p-2 m-4 rounded-md text-center flex items-center justify-between"
+                      className="bg-gray-300 p-2 m-4 rounded-md text-center flex items-center justify-between"
                     >
                       <div>
                         <p>{e}</p>
