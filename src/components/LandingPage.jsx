@@ -11,11 +11,11 @@ const LandingPage = () => {
   const { walletopen, setWalletOpen } = useContext(AppContext);
 
   return (
-    <div className="h-full flex flex-col justify-center text-center px-16">
-      <p className="text-9xl">
+    <div className="h-full flex flex-col justify-center text-center px-16 pt-48">
+      <p className="lg:text-9xl md:text-9xl text-6xl">
         NFT-DAO <br />
       </p>
-      <p className="text-lg">
+      <p className="text-lg text-justify hidden lg:block md:block ">
         An NFT Governed DAO is a decentralized autonomous organization that
         leverages non-fungible tokens (NFTs) as a means of governance. NFT
         holders have voting rights within the DAO, with each NFT acting as a
@@ -27,6 +27,15 @@ const LandingPage = () => {
         Governed DAOs empower individuals to actively contribute to
         decision-making and value creation, fostering a community-driven and
         inclusive governance model.
+      </p>
+      <p className="text-lg text-justify lg:hidden md:hidden ">
+        An NFT Governed DAO is a decentralized autonomous organization that uses
+        NFTs for governance. NFT holders have voting rights, with each NFT
+        serving as a voting token. This incentivizes participation and aligns
+        stakeholders' interests. NFTs can represent assets like real-world or
+        virtual assets, adding financial value. NFT Governed DAOs empower
+        individuals to contribute to decision-making and value creation,
+        fostering community-driven governance.
       </p>
       {isConnected ? (
         <NavLink to="/create">

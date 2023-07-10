@@ -21,6 +21,7 @@ function App() {
   const [walletopen, setWalletOpen] = useState(false);
   const [proposaldialogopen, setProposalDialogOpen] = useState(false);
   const [supplydialogopen, setsupplyDialogOpen] = useState(false);
+  const [buyNFTDialog, setBuyNFTDialog] = useState(false);
   return (
     <WagmiConfig config={config}>
       <AppContext.Provider
@@ -31,6 +32,8 @@ function App() {
           setProposalDialogOpen,
           supplydialogopen,
           setsupplyDialogOpen,
+          buyNFTDialog,
+          setBuyNFTDialog,
         }}
       >
         <ToastContainer />

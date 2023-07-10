@@ -41,11 +41,9 @@ const Home = () => {
       const proposalArray = [];
       for (let i = 1; i <= totalProposal; i++) {
         const proposalData = await contract.proposals(i);
-        console.log(proposalData);
         proposalArray.push(proposalData);
       }
       setProposalData(proposalArray);
-      console.log('this is final data :', proposalData);
     }
     getProposalData();
   }, []);

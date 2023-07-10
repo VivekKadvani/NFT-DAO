@@ -1,19 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { AppContext } from '../App';
 //utils
 import contractInstance from '../utils/contractInstance';
 import fireToast from '../utils/fireToast';
 import extractError from '../utils/extractError';
+//MUI
+import Dialog from '@mui/material/Dialog';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import BuyNFT from './BuyNFT';
 
 const ProposalDetail = () => {
   const { id } = useParams();
   const [proposalData, setProposalData] = useState();
   const [loading, setLoading] = useState(false);
+  const [isHolder, setIsHolder] = useState(false);
+  const { buyNFTDialog, setBuyNFTDialog } = useContext(AppContext);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     async function getProposalData() {
       const { contract, networkId, signerAddress } = await contractInstance();
       const proposalData = await contract.proposals(id);
+      let balanc = await contract.balanceOf(signerAddress);
+      if (balanc > 0) setIsHolder(true);
+      else setIsHolder(false);
+
       setProposalData(proposalData);
     }
     getProposalData();
@@ -45,6 +59,7 @@ const ProposalDetail = () => {
       setLoading(false);
     }
   };
+
   return (
     <div className="h-fit pt-20">
       {proposalData && (
@@ -82,61 +97,61 @@ const ProposalDetail = () => {
                 )}
               </div>
             </div>
-
-            <div className="py-4 bg-slate-300 rounded-xl p-4 mb-4">
-              <p className=" text-gray-500 py-2 text-xl">Your Opinion</p>
-              <div className="grid grid-cols-2 gap-4 ">
-                <button
-                  className="w-full rounded-xl bg-black p-4  text-green-600 text-xl font-semibold "
-                  disabled={proposalData.closed}
-                  onClick={() => {
-                    handleAgrreVote();
-                  }}
-                >
-                  Agree
-                </button>
-                <button
-                  className="w-full rounded-xl bg-black p-4  text-red-600 text-xl font-semibold"
-                  disabled={proposalData.closed}
-                  onClick={() => {
-                    handleDisagreeVote();
-                  }}
-                >
-                  Disagree
-                </button>
-              </div>
-            </div>
-            <div className="py-4 bg-slate-300 rounded-xl p-4 mb-4">
-              <p className=" text-gray-500 py-2 text-xl">Buy NFT </p>
-              <p className="text-gray-600 py-2">
-                If you wish to become a stakeholder for this DAO, you have to
-                buy NFT. For this you have to pay stake price 0.001 ETH. After
-                purchasing NFT you have rights to Vote in this DAO.
-              </p>
-              <div className="grid lg:grid-cols-3 sm:grid-cols-2  gap-4">
-                <div>
-                  {' '}
-                  <img
-                    src="https://coffee-different-cat-534.mypinata.cloud/ipfs/QmPBpgrMu1WTqwxUXSzgA36BuxqDWWSJVZrdgXjPz6kBuJ"
-                    className="rounded-xl"
-                  />
-                </div>
-                <div className="gap-4 flex flex-col  justify-between col-span-2">
-                  <div>
-                    <p>price</p>
-                  </div>
+            {isHolder && isHolder ? (
+              <div className="py-4 bg-slate-300 rounded-xl p-4 mb-4">
+                <p className=" text-gray-500 py-2 text-xl">Your Opinion</p>
+                <div className="grid grid-cols-2 gap-4 ">
                   <button
-                    className="w-1/2 rounded-xl bg-black p-4 self-center text-white text-xl font-semibold "
+                    className="w-full rounded-xl bg-black p-4  text-green-600 text-xl font-semibold "
                     disabled={proposalData.closed}
                     onClick={() => {
                       handleAgrreVote();
                     }}
                   >
-                    Buy NFT
+                    Agree
+                  </button>
+                  <button
+                    className="w-full rounded-xl bg-black p-4  text-red-600 text-xl font-semibold"
+                    disabled={proposalData.closed}
+                    onClick={() => {
+                      handleDisagreeVote();
+                    }}
+                  >
+                    Disagree
                   </button>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="py-4 bg-slate-300 rounded-xl p-4 mb-4">
+                <p className=" text-gray-500 py-2 text-xl">Buy NFT </p>
+                <p className="text-gray-800 py-2 text-xl ">
+                  If you wish to become a stakeholder for this DAO, you have to
+                  buy NFT. For this you have to pay stake price 0.001 ETH. After
+                  purchasing NFT you have rights to Vote in this DAO.
+                </p>
+                <div className=" gap-4">
+                  <div className="gap-4 flex flex-col  justify-between col-span-2">
+                    <button
+                      className="w-1/2 rounded-xl bg-black p-4 self-center text-white text-xl font-semibold "
+                      disabled={proposalData.closed}
+                      onClick={() => {
+                        setBuyNFTDialog(true);
+                      }}
+                    >
+                      Buy NFT
+                    </button>
+                  </div>
+                  <Dialog
+                    fullScreen={fullScreen}
+                    open={buyNFTDialog}
+                    onClose={() => setBuyNFTDialog(false)}
+                    aria-labelledby="responsive-dialog-title"
+                  >
+                    <BuyNFT />
+                  </Dialog>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
