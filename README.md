@@ -17,6 +17,7 @@ Before getting started, make sure you have the following prerequisites:
 - Node.js
 - React
 - Metamask
+- sepolia testnet
 
 ## Installation
 
@@ -49,7 +50,7 @@ To use the NFT DAO application, follow these steps:
 
 - Open the web application in your browser.
 - Connect your Ethereum wallet (e.g., Metamask) to the application.
-- cohange to sepolia test network. 
+- change to sepolia test network. 
 - Explore the available NFTs and their corresponding proposals.
 - Vote on proposals using your NFT voting rights.
 - Participate in the DAO's governance activities and contribute to decision-making.
