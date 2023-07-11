@@ -27,6 +27,7 @@ const CreateProposal = () => {
               description,
             );
             await createPropTx.wait();
+            setProposalDialogOpen(false);
           } else {
             setDescriptionError('Please enter valid description. ');
           }
@@ -41,7 +42,7 @@ const CreateProposal = () => {
       fireToast('error', 'Create Proposal Failed');
     } finally {
       setLoading(false);
-      setProposalDialogOpen(false);
+      
     }
   };
   return (
