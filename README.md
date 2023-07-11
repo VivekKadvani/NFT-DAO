@@ -71,11 +71,28 @@ Here are some screenshots of the NFT DAO application:
 
 Description of the screenshot.
 
-Screenshot 2
-Description of the screenshot.
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095020.png)
+This is landing page of Dapp.
 
-Screenshot 3
-Description of the screenshot.
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095204.png)
+Without connecting wallet if we click button it will popup for wallet connect, in this Dapp I implement only Metamask connection.
+
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095328.png)
+If we have on any page and disconnect our wallet it will display this popup , it will not show any page content
+
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095351.png)
+This is home page after connecting wallet, and it will show only if I connect with owner address . Because this three rights are owned by only owner of Contract.
+
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095640.png)
+
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095714.png)
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095805.png)
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095830.png)
+Give your vote on the proposal by clicking Agree or Disagree.
+
+![alttext](https://github.com/VivekKadvani/NFT-DAO/blob/master/src/images/screenshots/Screenshot%202023-07-11%20095921.png)
+If you are not NFT holder than this option will display, you can buy NFT and become a NFT holder and after that you can able to vote in this DAO.
+
 
 Feel free to explore the application and engage in governance activities within the NFT DAO!
 
