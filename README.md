@@ -1,6 +1,11 @@
 # NFT DAO
 
+
+
 This project implements an NFT Governed DAO (Decentralized Autonomous Organization) where NFT holders have voting rights within the organization. The project leverages the Ethereum blockchain and smart contracts to enable decentralized governance and decision-making.
+
+## Live Deployed Link 
+https://nft-dao-vny5.vercel.app/
 
 ## Table of Contents
 
