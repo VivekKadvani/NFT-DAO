@@ -23,41 +23,24 @@ const Airdrop = () => {
     getProposalData();
   }, []);
 
-  //   const setAddress = (address) => {
-  //     const regex = /^0x[a-fA-F0-9]{40}$/;
-  //     if (address !== '' && regex.test(address)) {
-  //       if (!addressData.includes(address)) { // Check if address already exists
-  //         if (addressData.length < maxSupply) {
-  //           setAddressData([...addressData, address]);
-  //           setError('');
-  //           console.log(maxSupply);
-  //         } else {
-  //           setError('You cannot enter more addresses than the total supply or increased total supply');
-  //         }
-  //       } else {
-  //         setError('Address already exists in the list');
-  //       }
-  //     } else {
-  //       setError('Please enter a valid address');
-  //     }
-  //   };
-
-  const setAddress = (address) => {
-    const regex = /^0x[a-fA-F0-9]{40}$/;
-    if (address !== '' && regex.test(address)) {
-      if (addressData.length < 25) {
-        setAddressData([...addressData, address]);
-        setError('');
+    const setAddress = (address) => {
+      const regex = /^0x[a-fA-F0-9]{40}$/;
+      if (address !== '' && regex.test(address)) {
+        if (!addressData.includes(address)) { // Check if address already exists
+          if (addressData.length < maxSupply) {
+            setAddressData([...addressData, address]);
+            setError('');
+            console.log(maxSupply);
+          } else {
+            setError('You cannot enter more addresses than the total supply or increased total supply');
+          }
+        } else {
+          setError('Address already exists in the list');
+        }
       } else {
-        setError(
-          'You can not enter more than Total Supply or Increase Total Supply',
-        );
+        setError('Please enter a valid address');
       }
-    } else {
-      setError('*Enter Valid Address.');
-    }
-  };
-
+    };
   const removeAddress = (index) => {
     const indexToRemove = index; // Index of the object to remove
     if (indexToRemove >= 0 && indexToRemove < addressData.length) {
