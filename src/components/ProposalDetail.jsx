@@ -83,7 +83,7 @@ const ProposalDetail = () => {
           ) : (
             <>
               {proposalData && (
-                <div className="px-16 my-8">
+                <div className="lg:px-16 md:px-8 xs:px-4 px-2 my-8">
                   <div className="bg-gray-200 h-fit rounded-2xl p-4">
                     <div className=" border-b  py-2 bg-gray-300 rounded-xl p-4 mb-4">
                       <p className="text-xl text-gray-500 py-2 ">
