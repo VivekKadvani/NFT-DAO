@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# NFT DAO
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project implements an NFT Governed DAO (Decentralized Autonomous Organization) where NFT holders have voting rights within the organization. The project leverages the Ethereum blockchain and smart contracts to enable decentralized governance and decision-making.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Rules](#rules)
+- [Screenshots](#screenshots)
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Before getting started, make sure you have the following prerequisites:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js
+- React
+- Metamask
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To install and set up the project, follow these steps:
 
-### `npm run build`
+1. Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+git clone https://github.com/your-username/nft-dao.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Install the dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+cd nft-dao
+npm install
+```
 
-### `npm run eject`
+Start Project
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Configure your Ethereum wallet provider (e.g., Metamask) to connect to the desired network.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To use the NFT DAO application, follow these steps:
 
-## Learn More
+- Open the web application in your browser.
+- Connect your Ethereum wallet (e.g., Metamask) to the application.
+- Explore the available NFTs and their corresponding proposals.
+- Vote on proposals using your NFT voting rights.
+- Participate in the DAO's governance activities and contribute to decision-making.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Rules
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The NFT DAO operates based on the following rules:
 
-### Code Splitting
+- Each NFT holder has voting rights equivalent to the number of NFTs they own.
+- Proposals are created by the DAO owner and contain a title and description.
+- Users can vote on proposals using their NFT voting rights.
+- Once all voters have cast their votes, the proposal is closed, and the result is calculated.
+- The proposal passes if the number of "yes" votes is greater than the number of "no" votes.
+- DAO owner has the ability to increase the total supply of NFTs.
+- Please refer to the smart contract code for more details on the implementation and specific rules.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Screenshots
 
-### Analyzing the Bundle Size
+Here are some screenshots of the NFT DAO application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Description of the screenshot.
 
-### Making a Progressive Web App
+Screenshot 2
+Description of the screenshot.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Screenshot 3
+Description of the screenshot.
 
-### Advanced Configuration
+Feel free to explore the application and engage in governance activities within the NFT DAO!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For more information or support, please contact your-email@example.com.
