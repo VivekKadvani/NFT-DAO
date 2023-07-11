@@ -125,7 +125,7 @@ const Header = () => {
               {/* logo and nav section  */}
               <div className="flex items-center">
                 <div className="flex">
-                  <NavLink to="/home" className="flex items-center">
+                  <NavLink to="/" className="flex items-center">
                     <div className="">
                       <img src={logo} alt="logo" className="h-14 " />
                     </div>
@@ -137,7 +137,7 @@ const Header = () => {
                 <div className="w-px ml-4 h-full bg-gray-400  hidden md:flex "></div>
                 <div className="ml-8 items-center hidden md:flex  ">
                   <div className="flex">
-                    <NavLink to="/create" className="flex">
+                    <NavLink to="/home" className="flex">
                       <div className="ml-2 text-white">
                         <p className=" text-gray-700 text-xl font-semibold">
                           Home
@@ -148,7 +148,7 @@ const Header = () => {
                 </div>
                 <div className="ml-8 items-center  hidden md:flex  ">
                   <div className="flex">
-                    <NavLink to="/create" className="flex">
+                    <NavLink to="/about" className="flex">
                       <div className="ml-2 text-white">
                         <p className=" text-gray-700 text-xl font-semibold">
                           About

@@ -38,7 +38,7 @@ const LandingPage = () => {
         fostering community-driven governance.
       </p>
       {isConnected ? (
-        <NavLink to="/create">
+        <NavLink to="/home">
           <button className="m-8 bg-black text-white px-10 py-4 text-xl rounded-3xl hover:scale-110 transition-all duration-300 drop-shadow-md">
             Get Start
           </button>

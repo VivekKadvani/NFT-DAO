@@ -15,6 +15,7 @@ import { config } from './utils/wagmiConfig';
 //toast
 import { ToastContainer, toast } from 'react-toastify';
 import Airdrop from './components/Airdrop';
+import About from './components/About';
 export const AppContext = createContext();
 
 function App() {
@@ -44,15 +45,14 @@ function App() {
             <Routes>
               <Route path="/">
                 <Route index element={<LandingPage />} />
-                <Route path="/home" element={<LandingPage />} />
+                <Route path="/" element={<LandingPage />} />
               </Route>
-              <Route path="/create" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/proposalDetail/:id" element={<ProposalDetail />} />
               <Route path="/airdrop" element={<Airdrop />} />
-              {/* <Route path="/profile" element={<Profile />} />
-            <Route path="/nftdetail/:nftaddress/:id" element={<NftDetail />} /> */}
+              <Route path="/about" element={<About />} />
             </Routes>
-            <Footer className="" />
+            <Footer />
           </div>
         </Router>
       </AppContext.Provider>

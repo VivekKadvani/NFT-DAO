@@ -37,12 +37,9 @@ const WalletConnect = () => {
 
   useEffect(() => {
     if (isConnected) {
-      console.log('yes it is working ');
       handleWalletConnect();
     } else {
-      console.log('isConnect is not true');
     }
-    console.log('inside useeffect : ', isConnected);
   }, [isConnected]);
 
   function connectWallet() {
@@ -56,7 +53,6 @@ const WalletConnect = () => {
       connectWallet();
     } catch (e) {
       fireToast('error', 'Wallet connection error');
-      // console.log(e);
     } finally {
       handleClose();
     }

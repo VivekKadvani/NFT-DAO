@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../App';
 import contractInstance from '../utils/contractInstance';
 import fireToast from '../utils/fireToast';
+import Loader from './Loader';
 
 const IncreaseTotalSupply = () => {
   const [supply, setSupply] = useState(0);
@@ -13,11 +14,18 @@ const IncreaseTotalSupply = () => {
 
   useEffect(() => {
     const getContractData = async () => {
-      const { contract, networkId, signerAddress } = await contractInstance();
-      let CurrentSupply = parseInt(await contract.totalSupply());
-      setCurrentSupply(CurrentSupply);
-      let maxSupply = parseInt(await contract.maxSupply());
-      setMaxSupply(maxSupply);
+      try {
+        setLoading(true);
+        const { contract, networkId, signerAddress } = await contractInstance();
+        let CurrentSupply = parseInt(await contract.totalSupply());
+        setCurrentSupply(CurrentSupply);
+        let maxSupply = parseInt(await contract.maxSupply());
+        setMaxSupply(maxSupply);
+      } catch (e) {
+        fireToast('error', 'Fetch Data Failed');
+      } finally {
+        setLoading(false);
+      }
     };
     getContractData();
   }, []);
@@ -47,15 +55,15 @@ const IncreaseTotalSupply = () => {
         </div>
         <div>
           <div className="rounded-xl bg-gray-200 p-4 my-2 flex justify-between">
-            <p className="text-xl">Current Supply</p>
+            <p className="text-xl">Current Holders</p>
             <p className="text-xl font-semibold">{currentSupply}</p>
           </div>
           <div className="rounded-xl bg-gray-200 p-4 my-2 flex justify-between">
-            <p className="text-xl">Maximum Supply</p>
+            <p className="text-xl">Maximum Holders</p>
             <p className="text-xl font-semibold">{maxSupply}</p>
           </div>
           <div className="rounded-xl bg-gray-200 p-4 my-2 flex justify-between">
-            <p className="text-xl">Available Supply</p>
+            <p className="text-xl">Available NFT Holdings</p>
             <p className="text-xl font-semibold">{maxSupply - currentSupply}</p>
           </div>
         </div>
@@ -71,25 +79,28 @@ const IncreaseTotalSupply = () => {
           />
           <span className="text-red-600">{supplyError}</span>
         </div>
-
-        <div className="mt-4 flex justify-center">
-          <button
-            className="rounded-xl p-4 bg-black text-white px-8 m-2 hover:-translate-y-1 transition-all duration-200"
-            onClick={() => {
-              handleIncreaseSupply();
-            }}
-          >
-            Create
-          </button>
-          <button
-            className="rounded-xl p-4 bg-gray-300 px-8 m-2 hover:-translate-y-1 transition-all duration-200"
-            onClick={() => {
-              setsupplyDialogOpen(false);
-            }}
-          >
-            Cancel
-          </button>
-        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="mt-4 flex justify-center">
+            <button
+              className="rounded-xl p-4 bg-black text-white px-8 m-2 hover:-translate-y-1 transition-all duration-200"
+              onClick={() => {
+                handleIncreaseSupply();
+              }}
+            >
+              Create
+            </button>
+            <button
+              className="rounded-xl p-4 bg-gray-300 px-8 m-2 hover:-translate-y-1 transition-all duration-200"
+              onClick={() => {
+                setsupplyDialogOpen(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 import contractInstance from '../utils/contractInstance';
 import fireToast from '../utils/fireToast';
 import Loader from './Loader';
+//wagmi
+import { useAccount, useBalance, useConnect } from 'wagmi';
+import Popup from './Popup';
 const Airdrop = () => {
+  const { isConnected } = useAccount();
   const [addressData, setAddressData] = useState([]);
   const [address, setCurrentAddress] = useState('');
   const [addressError, setError] = useState('');
@@ -76,85 +80,89 @@ const Airdrop = () => {
   };
   return (
     <div className="max-h-fit flex-grow">
-      <div className=" pt-20 min-h-max">
-        <div className="bg-gray-200  mx-16 p-4 mt-8 rounded-xl">
-          <div className="p-4 flex justify-between">
-            <p className="text-2xl font-semibold ">AirDrop NFT</p>
-            {loading ? <Loader /> : <> </>}
-            {addressData?.length > 0 ? (
-              <button
-                className="bg-black rounded-xl text-white p-4 font-semibold h-14 "
-                onClick={() => {
-                  handleAirDrop();
-                }}
-                disabled={loading}
-              >
-                {loading ? 'Airdrop Running' : 'Start Airdrop'}
-              </button>
-            ) : (
-              <button
-                className="bg-black opacity-50 rounded-xl text-white p-4 font-semibold "
-                disabled
-              >
-                Start Airdrop
-              </button>
-            )}
-          </div>
-          <div className="p-4 w-full">
-            <p className="text-xl my-4">Enter Address</p>
-            <div className="flex gap-6">
-              <input
-                type="text"
-                placeholder="Address"
-                className="w-full rounded-xl p-2 outline-0"
-                onChange={(event) => {
-                  setCurrentAddress(event.target.value);
-                }}
-              />
-
-              <button
-                className="p-4 rounded-xl bg-black text-white transition-all px-8 duration-200 font-semibold hover:text-green-500"
-                onClick={() => {
-                  setAddress(address);
-                }}
-              >
-                Add
-              </button>
+      {isConnected ? (
+        <div className=" pt-20 min-h-max">
+          <div className="bg-gray-200  mx-16 p-4 mt-8 rounded-xl">
+            <div className="p-4 flex justify-between">
+              <p className="text-2xl font-semibold ">AirDrop NFT</p>
+              {loading ? <Loader /> : <> </>}
+              {addressData?.length > 0 ? (
+                <button
+                  className="bg-black rounded-xl text-white p-4 font-semibold h-14 "
+                  onClick={() => {
+                    handleAirDrop();
+                  }}
+                  disabled={loading}
+                >
+                  {loading ? 'Airdrop Running' : 'Start Airdrop'}
+                </button>
+              ) : (
+                <button
+                  className="bg-black opacity-50 rounded-xl text-white p-4 font-semibold "
+                  disabled
+                >
+                  Start Airdrop
+                </button>
+              )}
             </div>
-            <span className="m-4 text-red-600">{addressError}</span>
-          </div>
-          <div>
-            {addressData.length > 0 ? (
-              <div className="bg-transparent border p-4 gap-2 border-gray-400 rounded-xl my-2 ">
-                {addressData.map((e, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="bg-gray-300 p-2 m-4 rounded-md text-center flex items-center justify-between"
-                    >
-                      <div>
-                        <p>{e}</p>
-                      </div>
-                      <div>
-                        <span
-                          className="material-symbols-outlined cursor-pointer"
-                          onClick={() => {
-                            removeAddress(index);
-                          }}
-                        >
-                          close
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
+            <div className="p-4 w-full">
+              <p className="text-xl my-4">Enter Address</p>
+              <div className="flex gap-6">
+                <input
+                  type="text"
+                  placeholder="Address"
+                  className="w-full rounded-xl p-2 outline-0"
+                  onChange={(event) => {
+                    setCurrentAddress(event.target.value);
+                  }}
+                />
+
+                <button
+                  className="p-4 rounded-xl bg-black text-white transition-all px-8 duration-200 font-semibold hover:text-green-500"
+                  onClick={() => {
+                    setAddress(address);
+                  }}
+                >
+                  Add
+                </button>
               </div>
-            ) : (
-              <></>
-            )}
+              <span className="m-4 text-red-600">{addressError}</span>
+            </div>
+            <div>
+              {addressData.length > 0 ? (
+                <div className="bg-transparent border p-4 gap-2 border-gray-400 rounded-xl my-2 ">
+                  {addressData.map((e, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="bg-gray-300 p-2 m-4 rounded-md text-center flex items-center justify-between"
+                      >
+                        <div>
+                          <p>{e}</p>
+                        </div>
+                        <div>
+                          <span
+                            className="material-symbols-outlined cursor-pointer"
+                            onClick={() => {
+                              removeAddress(index);
+                            }}
+                          >
+                            close
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <Popup />
+      )}
     </div>
   );
 };

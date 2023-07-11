@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../App';
 import contractInstance from '../utils/contractInstance';
 import fireToast from '../utils/fireToast';
+import Loader from './Loader';
 
 const CreateProposal = () => {
   const [title, setTitle] = useState('');
@@ -40,6 +41,7 @@ const CreateProposal = () => {
       fireToast('error', 'Create Proposal Failed');
     } finally {
       setLoading(false);
+      setProposalDialogOpen(false);
     }
   };
   return (
@@ -71,24 +73,28 @@ const CreateProposal = () => {
           />
           <span className="text-red-600">{descError}</span>
         </div>
-        <div className="mt-4 flex justify-center">
-          <button
-            className="rounded-xl p-4 bg-black text-white px-8 m-2 hover:-translate-y-1 transition-all duration-200"
-            onClick={() => {
-              handleCreateProposal();
-            }}
-          >
-            Create
-          </button>
-          <button
-            className="rounded-xl p-4 bg-gray-300 px-8 m-2 hover:-translate-y-1 transition-all duration-200"
-            onClick={() => {
-              setProposalDialogOpen(false);
-            }}
-          >
-            Cancel
-          </button>
-        </div>
+        {loading ? (
+          <Loader />
+        ) : (
+          <div className="mt-4 flex justify-center">
+            <button
+              className="rounded-xl p-4 bg-black text-white px-8 m-2 hover:-translate-y-1 transition-all duration-200"
+              onClick={() => {
+                handleCreateProposal();
+              }}
+            >
+              Create
+            </button>
+            <button
+              className="rounded-xl p-4 bg-gray-300 px-8 m-2 hover:-translate-y-1 transition-all duration-200"
+              onClick={() => {
+                setProposalDialogOpen(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
