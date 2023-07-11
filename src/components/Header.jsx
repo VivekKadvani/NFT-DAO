@@ -83,12 +83,12 @@ const Header = () => {
               </nav>
             </div>
             <div className="h-full py-6">
-              <NavLink to="/create" className="">
+              <NavLink to="/home" className="">
                 <div className=" flex justify-start h-12 my-4 mx-4 text-xl font-bold items-center hover:bg-gray-200 rounded-xl transition-all duration-200">
                   <p className="mx-4">Home</p>
                 </div>
               </NavLink>
-              <NavLink to="/create" className="">
+              <NavLink to="/about" className="">
                 <div className=" flex justify-start h-12 my-4 mx-4 text-xl font-bold items-center hover:bg-gray-200 rounded-xl transition-all duration-200">
                   <p className="mx-4">About</p>
                 </div>

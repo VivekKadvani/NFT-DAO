@@ -4,7 +4,7 @@ import Loader from './Loader';
 const About = () => {
   return (
     <div className="h-fit pt-20 flex-grow">
-      <div className="px-16 my-8">
+      <div className="lg:px-16 md:px-8 xs:px-4 px-2 my-8">
         <div className="bg-gray-200 h-fit rounded-2xl p-4">
           <div className=" border-b  py-2 bg-gray-300 rounded-xl p-4 mb-4">
             <p className="text-2xl text-gray-800 py-2 font-semibold ">
