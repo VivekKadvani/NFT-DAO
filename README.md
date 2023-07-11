@@ -98,4 +98,4 @@ If you are not NFT holder than this option will display, you can buy NFT and bec
 
 Feel free to explore the application and engage in governance activities within the NFT DAO!
 
-For more information or support, please contact your-email@example.com.
+For more information or support, please contact vkkadvani8866@gmail.com
