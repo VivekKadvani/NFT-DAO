@@ -20,6 +20,7 @@ const ProposalDetail = () => {
   const { id } = useParams();
   const [proposalData, setProposalData] = useState();
   const [loading, setLoading] = useState(false);
+  const [update, setUpdate] = useState(0);
   const [isHolder, setIsHolder] = useState(false);
   const { buyNFTDialog, setBuyNFTDialog } = useContext(AppContext);
   const theme = useTheme();
@@ -42,7 +43,7 @@ const ProposalDetail = () => {
       }
     }
     getProposalData();
-  }, [loading]);
+  }, [update]);
 
   const handleAgrreVote = async () => {
     try {
@@ -55,6 +56,7 @@ const ProposalDetail = () => {
       fireToast('error', error);
     } finally {
       setLoading(false);
+      setUpdate(update + 1);
     }
   };
   const handleDisagreeVote = async () => {
@@ -68,6 +70,7 @@ const ProposalDetail = () => {
       fireToast('error', error);
     } finally {
       setLoading(false);
+      setUpdate(update + 1);
     }
   };
 
@@ -176,7 +179,10 @@ const ProposalDetail = () => {
                               <Dialog
                                 fullScreen={fullScreen}
                                 open={buyNFTDialog}
-                                onClose={() => setBuyNFTDialog(false)}
+                                onClose={() => {
+                                  setBuyNFTDialog(false);
+                                  setUpdate(update + 1);
+                                }}
                                 aria-labelledby="responsive-dialog-title"
                               >
                                 <BuyNFT />
