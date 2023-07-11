@@ -42,7 +42,7 @@ const ProposalDetail = () => {
       }
     }
     getProposalData();
-  }, []);
+  }, [loading]);
 
   const handleAgrreVote = async () => {
     try {
